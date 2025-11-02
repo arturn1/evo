@@ -1,0 +1,7 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" fill="#1890ff" rx="32"/>
+  <g transform="translate(48, 48)">
+    <path d="M 48 8 C 25.909 8 8 25.909 8 48 C 8 70.091 25.909 88 48 88 C 70.091 88 88 70.091 88 48 C 88 25.909 70.091 8 48 8 Z M 48 20 C 63.464 20 76 32.536 76 48 C 76 63.464 63.464 76 48 76 C 32.536 76 20 63.464 20 48 C 20 32.536 32.536 20 48 20 Z M 44 32 L 44 52 L 52 52 L 52 32 Z M 44 60 L 44 68 L 52 68 L 52 60 Z" fill="white"/>
+  </g>
+  <text x="96" y="130" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">SGM</text>
+</svg>

@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:./dev.db
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - AUTH_TRUST_HOST=true
+    volumes:
+      - ./prisma:/app/prisma
+      - db-data:/app/prisma
+    command: sh -c "npx prisma migrate deploy && npm run seed && node server.js"
+    restart: unless-stopped
+
+volumes:
+  db-data:

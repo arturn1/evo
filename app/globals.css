@@ -24,3 +24,106 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-menu-icon {
+    display: block !important;
+  }
+
+  .desktop-sider {
+    display: none !important;
+  }
+
+  .header-title {
+    font-size: 16px !important;
+  }
+
+  .user-name {
+    display: none !important;
+  }
+
+  /* Tabelas responsivas */
+  .ant-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .ant-table {
+    min-width: 600px;
+  }
+
+  /* Modais em tela cheia no mobile */
+  .ant-modal {
+    max-width: 100% !important;
+    margin: 0 !important;
+    top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .ant-modal-content {
+    border-radius: 0 !important;
+    min-height: 100vh;
+  }
+
+  /* Formulários mais espaçados */
+  .ant-form-item {
+    margin-bottom: 20px !important;
+  }
+
+  /* Botões mais fáceis de clicar */
+  .ant-btn {
+    min-height: 44px !important;
+    padding: 8px 16px !important;
+  }
+
+  /* Cards mais compactos */
+  .ant-card {
+    margin-bottom: 16px;
+  }
+
+  .ant-card-head {
+    padding: 12px 16px !important;
+  }
+
+  .ant-card-body {
+    padding: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 14px !important;
+  }
+
+  /* Layout ainda mais compacto em telas muito pequenas */
+  .ant-layout-content {
+    padding: 12px !important;
+  }
+
+  .ant-statistic-title {
+    font-size: 12px !important;
+  }
+
+  .ant-statistic-content {
+    font-size: 18px !important;
+  }
+}
+
+/* Melhorias gerais de UX mobile */
+@media (hover: none) and (pointer: coarse) {
+
+  /* Aumentar área clicável em dispositivos touch */
+  .ant-table-row {
+    min-height: 48px;
+  }
+
+  .ant-menu-item {
+    min-height: 48px;
+    line-height: 48px !important;
+  }
+
+  /* Remover hover effects em touch devices */
+  .ant-table-row:hover {
+    background-color: transparent !important;
+  }
+}

@@ -6,21 +6,36 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "node scripts/seed.js",
+    "seed:dev": "tsx scripts/seed.ts"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.2.0",
+    "@prisma/client": "^6.18.0",
+    "antd": "^5.28.0",
+    "bcryptjs": "^3.0.2",
+    "dayjs": "^1.11.19",
+    "dotenv": "^17.2.3",
+    "next": "16.0.1",
+    "next-auth": "^5.0.0-beta.30",
+    "prisma": "^6.18.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "tsx": "^4.20.6",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@ducanh2912/next-pwa": "^10.2.9",
+    "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "eslint-config-next": "16.0.1",
+    "sharp": "^0.34.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

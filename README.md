@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema de Gerenciamento de Pacientes
 
-## Getting Started
+Sistema completo de gerenciamento médico com autenticação baseada em roles, CRUD de pacientes e laudos.
 
-First, run the development server:
+## 🚀 Quick Start
 
 ```bash
+# Instalar dependências
+npm install
+
+# Criar banco de dados
+npx prisma migrate dev
+
+# Criar usuário de teste
+curl http://localhost:3000/api/seed
+
+# Iniciar servidor
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse http://localhost:3000 e faça login com:
+- **Email**: admin@medical.com
+- **Senha**: 123456
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend**: Next.js 14 (App Router), React, TypeScript
+- **UI**: Ant Design + Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: SQLite + Prisma ORM
+- **Auth**: NextAuth v5
 
-## Learn More
+## 📁 Estrutura do Projeto
 
-To learn more about Next.js, take a look at the following resources:
+```
+├── app/
+│   ├── (auth)/login/          # Autenticação
+│   ├── (dashboard)/           # Área protegida
+│   │   └── dashboard/
+│   │       ├── page.tsx       # Dashboard
+│   │       ├── patients/      # Gestão de pacientes
+│   │       └── laudos/        # Gestão de laudos
+│   └── api/                   # API Routes
+├── lib/
+│   ├── auth/                  # Configuração NextAuth
+│   └── prisma/                # Prisma client
+├── hooks/                     # Custom hooks (usePatients, useLaudos)
+├── prisma/
+│   └── schema.prisma          # Schema do banco
+└── types/                     # TypeScript definitions
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 👥 Tipos de Usuário
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Médico Administrador (DOCTOR_ADMIN)
+- Visualiza todos os pacientes
+- Cria e gerencia pacientes
+- Cria e visualiza laudos
 
-## Deploy on Vercel
+### Médico (DOCTOR)
+- Visualiza apenas seus pacientes
+- Cria e gerencia seus pacientes
+- Cria e visualiza laudos de seus pacientes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Paciente (PATIENT)
+- Visualiza apenas seus próprios laudos
+- Acesso somente leitura
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔑 Features
+
+- ✅ Autenticação com NextAuth v5
+- ✅ Autorização baseada em roles
+- ✅ CRUD completo de pacientes
+- ✅ CRUD completo de laudos
+- ✅ Interface responsiva com Ant Design
+- ✅ TypeScript end-to-end
+- ✅ SQLite (fácil para desenvolvimento)
+- ✅ Custom hooks para data fetching
+
+## 📊 Modelo de Dados
+
+```
+User
+  ├── Doctor (CRM, especialidade, role)
+  │   └── N Patients
+  └── Patient (CPF, data nascimento, etc)
+      └── N Laudos (título, descrição, diagnóstico)
+```
+
+## 🛠️ Comandos Úteis
+
+```bash
+# Desenvolvimento
+npm run dev
+
+# Visualizar banco de dados
+npx prisma studio
+
+# Nova migração
+npx prisma migrate dev --name nome_da_migracao
+
+# Regenerar Prisma Client
+npx prisma generate
+
+# Build para produção
+npm run build
+npm start
+```
+
+## 📝 Próximos Passos
+
+Para continuar o desenvolvimento, você pode:
+
+1. **Adicionar Upload de Arquivos**: Implementar upload de imagens/PDFs para laudos
+2. **Relatórios**: Adicionar geração de relatórios em PDF
+3. **Notificações**: Sistema de notificações para novos laudos
+4. **Filtros Avançados**: Busca e filtros nas listagens
+5. **Exportação**: Exportar dados para Excel/CSV
+6. **Testes**: Adicionar testes unitários e E2E
+7. **Docker**: Containerizar a aplicação
+8. **Deploy**: Configurar CI/CD e deploy em produção
+
+## 📚 Documentação Adicional
+
+Veja `.github/copilot-instructions.md` para documentação detalhada da arquitetura, convenções de código e workflows de desenvolvimento.
+

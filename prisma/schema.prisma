@@ -1,0 +1,107 @@
+// Schema do Sistema de Gerenciamento de Pacientes
+// Suporta múltiplos tipos de usuários (Médicos e Pacientes) com roles diferentes
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+  DOCTOR
+  PATIENT
+}
+
+enum DoctorRole {
+  DOCTOR       // Médico comum
+  DOCTOR_ADMIN // Médico administrador
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String
+  name      String
+  userType  UserType
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  // Relações
+  doctor    Doctor?
+  patient   Patient?
+  
+  @@index([email])
+}
+
+model Doctor {
+  id          String      @id @default(cuid())
+  userId      String      @unique
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  crm         String      @unique
+  speciality  String
+  role        DoctorRole  @default(DOCTOR)
+  active      Boolean     @default(true) // Soft delete - false = desabilitado
+  
+  // Um médico tem N pacientes
+  patients    Patient[]
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@index([crm])
+  @@index([userId])
+}
+
+model Patient {
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  cpf         String    @unique
+  birthDate   DateTime
+  phone       String?
+  address     String?
+  active      Boolean   @default(true) // Soft delete - false = desabilitado
+  
+  // Um paciente pertence a um médico
+  doctorId    String
+  doctor      Doctor    @relation(fields: [doctorId], references: [id])
+  
+  // Um paciente tem N laudos
+  laudos      Laudo[]
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  @@index([cpf])
+  @@index([doctorId])
+  @@index([userId])
+}
+
+model Laudo {
+  id          String    @id @default(cuid())
+  
+  // Dados do laudo
+  title       String
+  description String
+  diagnosis   String
+  examDate    DateTime
+  
+  // Relacionamento com paciente
+  patientId   String
+  patient     Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  
+  // Arquivos anexados como JSON string
+  attachments String    @default("[]") // JSON array de URLs/paths
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  @@index([patientId])
+  @@index([examDate])
+}
