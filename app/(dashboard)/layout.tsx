@@ -6,6 +6,7 @@ import {
   LogoutOutlined,
   MedicineBoxOutlined,
   MenuOutlined,
+  SettingOutlined,
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
@@ -63,7 +64,7 @@ export default function DashboardLayout({
         router.push('/dashboard/laudos')
         setDrawerOpen(false)
       },
-    },
+    }
   ]
 
   const userMenuItems = [
@@ -84,6 +85,12 @@ export default function DashboardLayout({
           icon: <TeamOutlined />,
           label: 'Gerenciar Médicos',
           onClick: () => router.push('/dashboard/doctors'),
+        },
+        {
+          key: 'admin',
+          icon: <SettingOutlined />,
+          label: 'Administração',
+          onClick: () => router.push('/dashboard/admin'),
         },
       ]
       : []),
